@@ -5,14 +5,14 @@ using namespace std;
 int main()
 {
     int input;
-    int prod = 1;
+    int sum = 0;
 
     do
     {
         cin >> input;
+        sum += input;
 
-        prod *= input;
-    } while(input != 1);
+    } while(input != 0);
 
-    cout << "Prod: " << prod;
+    cout << "Prod: " << sum;
 }

@@ -14,5 +14,14 @@ int main()
         result *= i;
     }
 
+    /*
+
+    while (n >= 2)
+    {
+        result *= n--;
+    }
+    
+    */
+
     cout << n << "! = " << result;
 }

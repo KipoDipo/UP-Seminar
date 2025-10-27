@@ -9,22 +9,18 @@ int main()
     cout << "Enter amount of numbers to enter: ";
     cin >> n;
 
-    int biggestNegative = INT_MIN;
-
+    int biggestNegative = 0;
     for (int i = 0; i < n; i++)
     {
-        int input;
-        cin >> input;
-
-        if (input < 0)
+        int number;
+        std::cin >> number;
+        
+        if (number < 0 && (biggestNegative == 0 || number > biggestNegative))
         {
-            if (input > biggestNegative)
-            {
-                biggestNegative = input;
-            }
+            biggestNegative = number;
         }
     }
-    if (biggestNegative != INT_MIN)
+    if (biggestNegative != 0)
     {
         cout << "Biggest negative: " << biggestNegative;
     }

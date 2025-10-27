@@ -1,26 +1,26 @@
 # Булеви изрази
 
-```c
+```cpp
 int x = 5;
 int y = 3;
-printf("%d", x == y); // 0
-printf("%d", x >= y); // 1
-printf("%d", x != y); // 1
+cout << x == y; // 0
+cout << x >= y; // 1
+cout << x != y; // 1
 ```
 
-```c
+```cpp
 int x = 5;
 int y = 4;
 int z = x;
 
-printf("%d", (x == z) && (y < x) && (y != z));
-printf("%d", !(z == y) || (x != y) || (x <= z));
+cout << (x == z) && (y < x) && (y != z);
+cout << !(z == y) || (x != y) || (x <= z);
 ```
 
-```c
+```cpp
 int x = 1, y = 2, z = 3;
 
-printf("%d", x > y || y > x && z > x);
+cout << x > y || y > x && z > x;
 ```
 
 **Приоритет**: ***&&*** е с *по-висок* приоритет от ***||***
@@ -48,63 +48,64 @@ x > y || y > x && z > x
 
 # Блок и видимост на данни
 Код, заграден с {}, се нарича блок. Във всеки блок идентираме с таб веднъж след отварящата скоба.
-```c
+```cpp
 {
-    printf("Hello, world!");
+    cout << "Hello, world!";
 }
 ```
 
-```c
+```cpp
 {
-    printf("Hello,");
+    cout << "Hello,";
 
     {
-        printf(" world!");
+        cout << " world!";
     }
 }
 ```
 
 Променливите направени в един блок, са видими само и единствено за този блок, както и вградените в него блокове.
 
-```c
+```cpp
 {
     int a = 10;
-    printf("%d", a);
+    cout << a;
     {
         int b = 20;
-        printf("\t%d", b);
+        cout << "\t" << b;
     }
 
-    printf("\t%d", a + b); // ERROR: b не съществува в този блок
+    cout << "\t" << a + b; // ERROR: b не съществува в този блок
 }
 ```
 Ако искаме да запазим стойността на променлива, която ще се получи в блок, извън този блок, можем да приложим следната техника.
 
 
-```c
+```cpp
 {
     int a = 10;
     int b;
-    printf("%d", a);
+    cout << a;
     {
         b = 20;
-        printf("\t%d", b);
+        cout << "\t" << b;
     }
 
-    printf("\t%d", a + b); // Ok
+    cout << "\t" << a + b; // OK
 }
 ```
 
 Тези променливи се наричат *локални*, защото са локални за някакъв блок от код. Освен тях съществуват и *глобални* - те се намират извън всяка функция, включително главната (main).
 
-```c
-#include <stdio.h>
+```cpp
+#include <iostream>
+using namespace std;
 
 int windowsVersion = 11; // global variable
 
 int main()
 {
-    printf("%d", windowsVersion); 
+    cout << windowsVersion; 
 }
 ```
 
@@ -113,56 +114,56 @@ int main()
 # if, else if, else
 Контролирането на това кога даден фрагмент от кода да се изпълни и кога не е съществена част от писането на какъвто и да е код. Първият начин за да постигнем този контрол, който ще разгледаме, е конструкцията ``if``.
 
-```c
+```cpp
 if (<булев_израз>)
 {
     // code
 }
 ```
 
-Ако стойността на ``<булев_израз>`` е оценена до true (1), кодът в блока свързан към ``if`` ще се изпълни. Ако ли не - ще се пропусне.
+Ако стойността на ``<булев_израз>`` е оценена до true, кодът в блока свързан към ``if`` ще се изпълни. Ако ли не - ще се пропусне.
 
-```c
-int hasDrunk = 0;
-int isOver18 = 1;
-int hasLicense = 1;
+```cpp
+bool hasDrunk = false;
+bool isOver18 = true;
+bool hasLicense = true;
 
 if (!hasDrunk && isOver18 && hasLicense)
 {
-    printf("You can drive!");
+    cout << "You can drive!";
 }
 ```
 
-Ако искаме да изпълним код, в случай че условието е оценено до false (0), използваме ``else``.
+Ако искаме да изпълним код, в случай че условието е оценено до false, използваме ``else``.
 
-```c
-int hasDrunk = false;
-int isOver18 = true;
-int hasLicense = true;
+```cpp
+bool hasDrunk = false;
+bool isOver18 = true;
+bool hasLicense = true;
 
 if (!hasDrunk && isOver18 && hasLicense)
 {
-    printf("You can drive!");
+    cout << "You can drive!";
 }
 else
 {
-    printf("You CAN'T drive!");
+    cout << "You CAN'T drive!";
 }
 ```
 
 Ако искаме да направим множество проверки, имаме няколко варианта. Единият е с няколко if-a.
 
-```c
+```cpp
 int input;
-scanf("%d", input);
+cin >> input;
 
 if (input % 2 == 0)
 {
-    printf("%d is divisible by 2\n", input);
+    cout << input << " is divisible by 2\n";
 }
 if (input % 10 == 0)
 {
-    printf("%d is divisible by 10\n", input);
+    cout << input << " is divisible by 10\n";
 }
 ```
 
@@ -183,19 +184,17 @@ x is divisible by 10
 \
 Вариант в който **първият успешен** блок ще се изпълни е с конструкцията else if.
 
-```c
+```cpp
 int input;
 cin >> input;
 
-scanf("%d", input);
-
 if (input % 2 == 0)
 {
-    printf("%d is divisible by 2\n", input);
+    cout << input << " is divisible by 2\n";
 }
 else if (input % 10 == 0)
 {
-    printf("%d is divisible by 10\n", input);
+    cout << input << " is divisible by 10\n";
 }
 ```
 
@@ -213,19 +212,17 @@ x is divisible by 2
 ```
 Това не е особено полезно, защото ако число се дели на 10, то следва да се дели и на 2. Информацията за този else if е следователно с по-висок приоритет. В такива случаи решението е просто да обърнем реда на проверки.
 
-```c
+```cpp
 int input;
 cin >> input;
 
-scanf("%d", input);
-
 if (input % 10 == 0)
 {
-    printf("%d is divisible by 10\n", input);
+    cout << input << " is divisible by 10\n";
 }
 else if (input % 2 == 0)
 {
-    printf("%d is divisible by 2\n", input);
+    cout << input << " is divisible by 2\n";
 }
 ```
 При вход 10 и 20 ще получим на изхода:
@@ -246,9 +243,9 @@ x is divisible by 10
 ```
 
 Пример:
-```c
-int isFromAmerica;
-scanf("%d", isFromAmerica);
+```cpp
+bool isFromAmerica;
+cin >> isFromAmerica;
 
 int drinkingAge = isFromAmerica ? 21 : 18;
 
@@ -266,9 +263,9 @@ else
 ``` 
 
 # switch
-``switch`` позволява тестването на дадена <u>числова</u> променлива или израз за равенство измежду списък от стойностти. Всяка стойност за проверка се нарича случай (case). За случай, който да се изпълни, когато нито една от стойностите не съвпада с елемент от списъка, използваме ``default`` (не е задължително).
+``switch`` позволява тестването на дадена <u>целочислена</u> променлива или израз за равенство измежду списък от стойностти. Всяка стойност за проверка се нарича случай (case). За случай, който да се изпълни, когато нито една от стойностите не съвпада с елемент от списъка, използваме ``default`` (не е задължително).
 
-```c
+```cpp
 switch(<израз|стойност>)
 {
 	case <стойност_за_проверка>: 
@@ -287,36 +284,36 @@ switch(<израз|стойност>)
 ```
 Забелязваме, че в края на всеки случай има break. Той не е задължителен, но има много важна роля. Когато попаднем в някой случай, кодът от него, до края на блокът за switch ще се изпълни, освен ако не е срещнат break;
 
-```c
+```cpp
 switch(input)
 {
     case 1:
-    printf("one");
+    cout << "one";
     
     case 2:
-    printf("two");
+    cout << "two";
 
     case 3:
-    printf("three");
+    cout << "three";
 }
 ```
 При вход ``1``, на изхода ще имаме: ``onetwothree``
 
 За това в почти всички случаи ще искаме да има break, освен ако наистина знаем че искаме кодът да продължи надолу. Това пропускане на break се нарича fall-through.
 
-```c
+```cpp
 switch(input)
 {
     case 1:
-    printf("one");
+    cout << "one";
     break;
     
     case 2:
-    printf("two");
+    cout << "two";
     break;
 
     case 3:
-    printf("three");
+    cout << "three";
     break;
 }
 ```
@@ -324,34 +321,34 @@ switch(input)
 
 
 Пример, когато fall-through е приложимо:
-```c
+```cpp
 switch(month)
 {
     case 3:
     case 4:
     case 5:
-    printf("Spring");
+    cout << "Spring";
     break;
 
     case 6:
     case 7:
     case 8:
-    printf("Summer");
+    cout << "Summer";
     break;
 
     case 9:
     case 10:
     case 11:
-    printf("Autumn");
+    cout << "Autumn";
     break;
 
     case 12:
     case 1:
     case 2:
-    printf("Winter");
+    cout << "Winter"
     break;
 
     default:
-    printf("ERROR");
+    cout << "ERROR";
     break;
 }
