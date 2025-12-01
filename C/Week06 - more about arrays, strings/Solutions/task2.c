@@ -49,4 +49,6 @@ int main(void)
     rotateLeft(arr, size, 0);
     
     printArray(arr, size);
+
+    return 0;
 }
