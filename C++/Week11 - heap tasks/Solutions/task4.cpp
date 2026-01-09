@@ -12,7 +12,7 @@ char** tokenizePath(const char* path, int& count)
     }
     count++; // for the last item, since the string doesn't end in '/'
 
-    char** result = new char * [count + 1];
+    char** result = new char * [count];
 
     int index = 0;
     int beginIndex = 0;
